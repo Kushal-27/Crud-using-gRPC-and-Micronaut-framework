@@ -1,0 +1,6 @@
+applicationType: default
+defaultPackage: com.example
+testFramework: junit
+sourceLanguage: java
+buildTool: gradle
+features: [app-name, discovery-core, gradle, grpc, http-client-test, java, java-application, jdbc-hikari, junit, logback, micronaut-aot, micronaut-build, netty-server, postgres, properties, readme, serialization-jackson, shade, test-resources]

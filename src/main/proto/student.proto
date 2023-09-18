@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.example";
+option java_outer_classname = "Student";
+option objc_class_prefix = "HLW";
+
+package com.example;
+
+service StudentService {
+
+  rpc addStudentDetails(CreateOrUpdateStudentRequest) returns (StudentReply);
+
+  rpc getStudentDetails (StudentRequest) returns (StudentReply);
+  rpc editStudentDetails (CreateOrUpdateStudentRequest) returns (StudentReply);
+  rpc deleteStudentDetails (StudentRequest) returns (StudentReply);
+}
+
+message StudentRequest {
+  int32 id= 1;
+}
+message CreateOrUpdateStudentRequest {
+  int32 id=1;
+  string name = 2;
+  string level = 3;
+  string grade = 4;
+  int32 marks = 5;
+}
+message StudentReply {
+  string name =1;
+  string level=2;
+  string grade=3;
+  int32 marks =4;
+
+}
+

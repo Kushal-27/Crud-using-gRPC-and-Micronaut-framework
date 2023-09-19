@@ -7,11 +7,15 @@ option objc_class_prefix = "HLW";
 
 package com.example;
 
+import "google/api/annotations.proto";
 service StudentService {
 
   rpc addStudentDetails(CreateOrUpdateStudentRequest) returns (StudentReply);
 
   rpc getStudentDetails (StudentRequest) returns (StudentReply);
+
+
+
   rpc editStudentDetails (CreateOrUpdateStudentRequest) returns (StudentReply);
   rpc deleteStudentDetails (StudentRequest) returns (StudentReply);
 }

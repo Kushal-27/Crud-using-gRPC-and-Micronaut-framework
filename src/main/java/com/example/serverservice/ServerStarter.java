@@ -1,6 +1,5 @@
 package com.example.serverservice;
 
-import com.example.repository.StudentRepository;
 import io.grpc.ServerBuilder;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;

@@ -9,16 +9,14 @@ import com.example.repository.StudentRepository;
 import io.grpc.Status;
 import io.grpc.stub.StreamObserver;
 
-import io.micronaut.http.annotation.Controller;
-import io.micronaut.http.annotation.Get;
-import io.micronaut.http.annotation.PathVariable;
+
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 
 import java.util.Optional;
 import java.util.logging.Logger;
 @Singleton
-public class StudentServiceImpl extends StudentServiceGrpc.StudentServiceImplBase {
+public class StudentServiceImpl extends StudentServiceGrpc.StudentServiceImplBase{
     private static final Logger logger = Logger.getLogger(StudentServiceImpl.class.getName());
     @Inject
     private StudentRepository studentRepository;

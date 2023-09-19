@@ -25,6 +25,8 @@ dependencies {
     testImplementation("io.micronaut:micronaut-http-client")
     implementation("io.micronaut.data:micronaut-data-hibernate-jpa")
     annotationProcessor("io.micronaut:micronaut-inject-java")
+// https://mvnrepository.com/artifact/io.reactivex.rxjava3/rxjava
+    implementation group: 'io.reactivex.rxjava3', name: 'rxjava', version: '3.1.6'
 
 
 }

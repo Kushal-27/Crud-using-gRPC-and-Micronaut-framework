@@ -1,5 +1,6 @@
 package com.example.serverservice;
 
+import com.example.interceptors.ApiKeyAuthInterceptor;
 import io.grpc.ServerBuilder;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
@@ -12,6 +13,8 @@ public class ServerStarter {
     public void startService() throws IOException {
 
         System.out.println("service started on port 8081");
-        ServerBuilder.forPort(8081).addService(studentService).build().start();
+        ServerBuilder.forPort(8081).addService(studentService)
+                .intercept(new ApiKeyAuthInterceptor())
+                .build().start();
     }
 }

@@ -5,6 +5,7 @@ import com.example.StudentReply;
 import com.example.StudentRequest;
 import com.example.StudentServiceGrpc;
 import com.example.entity.Student;
+import com.example.interceptors.ApiKeyAuthInterceptorClient;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import jakarta.inject.Singleton;
@@ -16,6 +17,7 @@ public class ClientService {
         ManagedChannel channel = ManagedChannelBuilder
                 .forAddress("localhost", 8081)
                 .usePlaintext() // disable TLS which is enabled by default and requires certificates
+                .intercept(new ApiKeyAuthInterceptorClient())
                 .build();
         StudentServiceGrpc.StudentServiceBlockingStub client = StudentServiceGrpc.newBlockingStub(channel);
 

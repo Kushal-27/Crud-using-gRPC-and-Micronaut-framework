@@ -8,14 +8,13 @@ import com.example.entity.Student;
 import com.example.repository.StudentRepository;
 import io.grpc.Status;
 import io.grpc.stub.StreamObserver;
-
-
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 
 import java.util.Optional;
 import java.util.logging.Logger;
 @Singleton
+//@GrpcService
 public class StudentServiceImpl extends StudentServiceGrpc.StudentServiceImplBase{
     private static final Logger logger = Logger.getLogger(StudentServiceImpl.class.getName());
     @Inject

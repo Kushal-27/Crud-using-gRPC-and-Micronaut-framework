@@ -1,14 +1,9 @@
 package com.example.controller;
 
+import com.example.StudentReply;
 import com.example.clientservice.ClientService;
 import com.example.entity.Student;
-import com.example.StudentReply;
-import com.example.StudentRequest;
-import com.example.serverservice.StudentServiceImpl;
-import io.grpc.stub.StreamObserver;
-import io.micronaut.context.annotation.Context;
 import io.micronaut.http.annotation.*;
-import io.reactivex.rxjava3.core.Single;
 import jakarta.inject.Inject;
 
 @Controller

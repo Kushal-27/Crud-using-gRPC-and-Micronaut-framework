@@ -4,6 +4,7 @@ option java_multiple_files = true;
 option java_package = "com.example";
 option java_outer_classname = "Student";
 option objc_class_prefix = "HLW";
+import "google/protobuf/empty.proto";
 
 package com.example;
 
@@ -18,6 +19,7 @@ service StudentService {
 
   rpc editStudentDetails (CreateOrUpdateStudentRequest) returns (StudentReply);
   rpc deleteStudentDetails (StudentRequest) returns (StudentReply);
+  rpc listStudentsDetails(EmptyRequest) returns (stream StudentReply);
 }
 
 message StudentRequest {
@@ -30,11 +32,18 @@ message CreateOrUpdateStudentRequest {
   string grade = 4;
   int32 marks = 5;
 }
+message EmptyRequest{
+
+}
 message StudentReply {
   string name =1;
   string level=2;
   string grade=3;
   int32 marks =4;
+  int32 id = 5;
 
+}
+message StudentResponse {
+  repeated StudentReply studentReply=1;
 }
 

@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.example";
+option java_outer_classname = "Users";
+option objc_class_prefix = "HLW";
+
+package com.example;
+service UserService {
+
+  rpc addUser(CreateOrUpdateUserRequest) returns (UserReply);
+
+  rpc getUser (UserRequest) returns (UserReply);
+
+
+
+  rpc editUser (CreateOrUpdateUserRequest) returns (UserReply);
+  rpc deleteUser (UserRequest) returns (UserReply);
+}
+message UserRequest {
+  int32 id= 1;
+}
+message CreateOrUpdateUserRequest {
+  int32 id=1;
+  string name = 2;
+  string password = 3;
+  string role = 4;
+
+}
+message UserReply {
+  int32 id=1;
+  string name = 2;
+  string password = 3;
+  string role = 4;
+
+}
+

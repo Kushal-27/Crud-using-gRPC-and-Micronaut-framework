@@ -7,6 +7,7 @@ import io.micronaut.http.annotation.*;
 import jakarta.inject.Inject;
 
 @Controller
+
 public class StudentController {
     @Inject
     private ClientService clientService;

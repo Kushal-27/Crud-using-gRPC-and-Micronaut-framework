@@ -1,19 +1,20 @@
 package com.example.serverservice;
 
-import com.example.CreateOrUpdateStudentRequest;
-import com.example.StudentReply;
-import com.example.StudentRequest;
-import com.example.StudentServiceGrpc;
+import com.example.*;
 import com.example.entity.Student;
 import com.example.repository.StudentRepository;
+import com.google.protobuf.Empty;
 import io.grpc.Status;
 import io.grpc.stub.StreamObserver;
+//import io.micronaut.http.server.cors.CrossOrigin;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 @Singleton
+
 //@GrpcService
 public class StudentServiceImpl extends StudentServiceGrpc.StudentServiceImplBase{
     private static final Logger logger = Logger.getLogger(StudentServiceImpl.class.getName());
@@ -28,6 +29,7 @@ public class StudentServiceImpl extends StudentServiceGrpc.StudentServiceImplBas
                     .setGrade(request.getGrade())
                     .setLevel(request.getLevel())
                     .setMarks((request.getMarks()))
+                    .setId(request.getId())
                     .build();
 
             Student student = new Student();
@@ -62,11 +64,13 @@ public class StudentServiceImpl extends StudentServiceGrpc.StudentServiceImplBas
             Optional<Student> studentOptional = studentRepository.findById(id);
             if (studentOptional.isPresent()) {
                 Student student1 = studentOptional.get();
+                int idd = Math.toIntExact(student1.getId());
                 StudentReply studentReply = StudentReply.newBuilder()
                         .setName(student1.getName())
                         .setGrade(student1.getGrade())
                         .setLevel(student1.getLevel())
                         .setMarks(student1.getMarks())
+                        .setId(idd)
                         .build();
 
                 responseObserver.onNext(studentReply);
@@ -114,6 +118,7 @@ public class StudentServiceImpl extends StudentServiceGrpc.StudentServiceImplBas
                         .setGrade(request.getGrade())
                         .setLevel(request.getLevel())
                         .setMarks(request.getMarks())
+                        .setId(request.getId())
                         .build();
 
                 responseObserver.onNext(studentReply);
@@ -144,12 +149,14 @@ public class StudentServiceImpl extends StudentServiceGrpc.StudentServiceImplBas
             Optional<Student> studentOptional = studentRepository.findById(id);
             if (studentOptional.isPresent()) {
                 Student student1 = studentOptional.get();
+                int idd = Math.toIntExact(student1.getId());
                 studentRepository.delete(student1);
                 StudentReply studentReply = StudentReply.newBuilder()
                         .setName(student1.getName())
                         .setGrade(student1.getGrade())
                         .setLevel(student1.getLevel())
                         .setMarks(student1.getMarks())
+                        .setId(idd)
                         .build();
 
                 responseObserver.onNext(studentReply);
@@ -171,5 +178,34 @@ public class StudentServiceImpl extends StudentServiceGrpc.StudentServiceImplBas
                     .asRuntimeException());
         }
     }
+
+    @Override
+    public void listStudentsDetails(EmptyRequest request, StreamObserver<StudentReply> responseObserver) {
+        try {
+            List<Student> studentList = studentRepository.findAll();
+
+            for (Student student : studentList) {
+                int id = Math.toIntExact(student.getId());
+                StudentReply reply = StudentReply.newBuilder()
+                        .setId(id)
+                        .setName(student.getName())
+                        .setGrade(student.getGrade())
+                        .setLevel(student.getLevel())
+                        .build();
+
+                responseObserver.onNext(reply);
+            }
+
+            responseObserver.onCompleted();
+        } catch (Exception e) {
+            responseObserver.onError(
+                    Status.INTERNAL
+                            .withDescription("An error occurred while fetching student data.")
+                            .withCause(e)
+                            .asRuntimeException()
+            );
+        }
+    }
+
 
 }

@@ -10,11 +10,13 @@ import java.io.IOException;
 public class ServerStarter {
     @Inject
     private StudentServiceImpl studentService;
+//    @Inject
+//    private UserServiceImpl userService;
     public void startService() throws IOException {
 
         System.out.println("service started on port 8081");
         ServerBuilder.forPort(8081).addService(studentService)
-                .intercept(new ApiKeyAuthInterceptor())
+                //.intercept(new ApiKeyAuthInterceptor())
                 .build().start();
     }
 }
